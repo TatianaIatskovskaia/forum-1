@@ -5,3 +5,5 @@ export const createPost = async (postData) => {
     // return post.save();
     return Post.create(postData);
 }
+
+export const findPostById = async (id) => Post.findById(id).exec();
