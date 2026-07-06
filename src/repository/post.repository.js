@@ -7,3 +7,5 @@ export const createPost = async (postData) => {
 }
 
 export const findPostById = async (id) => Post.findById(id).exec();
+
+export const deletePost = async (id) => Post.findByIdAndDelete(id).exec();
