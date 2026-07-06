@@ -1,5 +1,8 @@
+import * as postRepository from '../repository/post.repository.js';
+
 export const createPost = async (author, data) => {
-    // TODO
+    const tags = [...new Set(data.tags)];
+    return await postRepository.createPost({author, ...data, tags});
 }
 
 export const getPostById = async (id) => {
