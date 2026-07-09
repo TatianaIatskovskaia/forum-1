@@ -32,7 +32,12 @@ export const addLike = async (id) => {
 export const getPostsByAuthor = async (author) => await postRepository.findPostsByAuthor(author);
 
 export const addComment = async (id, commenter, content) => {
-    // TODO
+    const comment = {user: commenter, message: content};
+    const post = await postRepository.addComment(id, comment);
+    if (!post) {
+        throw new Error(`Post with id = ${id} not found`);
+    }
+    return post;
 }
 
 export const getPostsByTags = async (tagsString) => {
