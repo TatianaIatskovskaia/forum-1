@@ -29,9 +29,7 @@ export const addLike = async (id) => {
     return post;
 }
 
-export const getPostsByAuthor = async (author) => {
-    // TODO
-}
+export const getPostsByAuthor = async (author) => await postRepository.findPostsByAuthor(author);
 
 export const addComment = async (id, commenter, content) => {
     // TODO
