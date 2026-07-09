@@ -15,3 +15,8 @@ export const addLike = async (id) => Post.findByIdAndUpdate(id, { $inc: { likes:
 export const findPostsByAuthor = async (author) => Post.find({ author: new RegExp(`^${author}$`, 'i') }).exec();
 
 export const addComment = async (id, comment) => Post.findByIdAndUpdate(id, { $push: { comments: comment } }, { returnDocument: 'after' }).exec();
+
+export const findPostsByTags = async (tags) => {
+    const tagsRegex = tags.map(tag => new RegExp(`^${tag}$`, 'i'));
+    return Post.find({ tags: { $in: tagsRegex } }).exec();
+}

@@ -41,7 +41,8 @@ export const addComment = async (id, commenter, content) => {
 }
 
 export const getPostsByTags = async (tagsString) => {
-    // TODO
+    const tags = tagsString.split(',').map(tag => tag.trim());
+    return await postRepository.findPostsByTags(tags);
 }
 
 export const getPostsByPeriod = async (dateFrom, dateTo) => {
