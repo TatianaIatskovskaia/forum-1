@@ -22,7 +22,11 @@ export const deletePost = async (id) => {
 }
 
 export const addLike = async (id) => {
-    // TODO
+    const post = await postRepository.addLike(id);
+    if (!post) {
+        throw new Error(`Post with id = ${id} not found`);
+    }
+    return post;
 }
 
 export const getPostsByAuthor = async (author) => {

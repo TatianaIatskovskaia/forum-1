@@ -9,3 +9,5 @@ export const createPost = async (postData) => {
 export const findPostById = async (id) => Post.findById(id).exec();
 
 export const deletePost = async (id) => Post.findByIdAndDelete(id).exec();
+
+export const addLike = async (id) => Post.findByIdAndUpdate(id, { $inc: { likes: 1 } }, { returnDocument: 'after' }).exec();
