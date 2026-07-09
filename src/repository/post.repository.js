@@ -20,3 +20,5 @@ export const findPostsByTags = async (tags) => {
     const tagsRegex = tags.map(tag => new RegExp(`^${tag}$`, 'i'));
     return Post.find({ tags: { $in: tagsRegex } }).exec();
 }
+
+export const findPostsByPeriod = async (dateFrom, dateTo) => Post.find({ dateCreated: { $gte: dateFrom, $lte: dateTo } }).exec();

@@ -45,9 +45,7 @@ export const getPostsByTags = async (tagsString) => {
     return await postRepository.findPostsByTags(tags);
 }
 
-export const getPostsByPeriod = async (dateFrom, dateTo) => {
-    // TODO
-}
+export const getPostsByPeriod = async (dateFrom, dateTo) => await postRepository.findPostsByPeriod(dateFrom, dateTo);
 
 export const updatePost = async (id, data) => {
     // TODO
