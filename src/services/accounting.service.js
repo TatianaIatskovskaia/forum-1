@@ -1,4 +1,4 @@
-export const registerUser = async (user) => {
+export const register = async (user) => {
     //TODO
 }
 
