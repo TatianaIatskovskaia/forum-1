@@ -11,12 +11,7 @@ export const registerUser = async (req, res) => {
 };
 
 export const logIn = async (req, res) => {
-    const user = await accountingService.logIn(req.headers);
-    if (user) {
-        res.json(user);
-    } else {
-        res.status(401).send();
-    }
+    //todo
 };
 
 export const deleteUser = async (req, res, next) => {
@@ -39,8 +34,8 @@ export const updateUser = async (req, res, next) => {
 
 export const addRole = async (req, res, next) => {
     try {
-        const user = await accountingService.addRole(req.params.user, req.params.role);
-        return res.json(user);
+        const userRole = await accountingService.changeRoles(req.params.user, req.params.role, true);
+        return res.json(userRole);
     } catch (e) {
         return next(e);
     }
@@ -48,20 +43,15 @@ export const addRole = async (req, res, next) => {
 
 export const  deleteRole = async (req, res, next) => {
     try {
-        const user = await accountingService.deleteRole(req.params.user, req.params.role);
-        return res.json(user);
+        const userRole = await accountingService.changeRoles(req.params.user, req.params.role, false);
+        return res.json(userRole);
     } catch (e) {
         return next(e);
     }
 };
 
 export const changePassword = async (req, res, next) => {
-    try {
-        const user = await accountingService.changePassword(req.body.password);
-        return res.json(user);
-    } catch (e) {
-        return next(e);
-    }
+    //todo
 };
 
 export const getUser = async (req, res, next) => {

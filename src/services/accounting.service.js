@@ -2,30 +2,22 @@ export const registerUser = async (user) => {
     //TODO
 }
 
-export const logIn = async (data) => {
+export const deleteUser = async (login) => {
     //TODO
 }
 
-export const deleteUser = async (user) => {
+export const updateUser = async (login, updateData) => {
     //TODO
 }
 
-export const updateUser = async (user, data) => {
+export const changeRoles = async (login, role, isAddRole) => {
     //TODO
 }
 
-export const addRole = async (user, role) => {
+export const changePassword = async (login, newPassword) => {
     //TODO
 }
 
-export const deleteRole = async (user, role) => {
-    //TODO
-}
-
-export const changePassword = async (newPassword) => {
-    //TODO
-}
-
-export const getUser = async (user) => {
+export const getUser = async (login) => {
     //TODO
 }
