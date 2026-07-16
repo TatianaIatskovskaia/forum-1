@@ -10,15 +10,33 @@ export const register = async (user) => {
 }
 
 export const deleteUser = async (login) => {
-    //TODO
+    const user = await userRepository.deleteUser(login);
+    if (!user) {
+        throw new Error(`User with login = ${login} not found`);
+    }
+    return user;
 }
 
 export const updateUser = async (login, updateData) => {
-    //TODO
+    const user = await userRepository.updateUser(login, updateData);
+    if (!user) {
+        throw new Error(`User with login = ${login} not found`);
+    }
+    return user;
 }
 
 export const changeRoles = async (login, role, isAddRole) => {
-    //TODO
+    role = role.toUpperCase();
+    let user;
+    if (isAddRole) {
+        user = await userRepository.addRole(login, role);
+    } else {
+        user = await userRepository.deleteRole(login, role);
+    }
+    if (!user) {
+        throw new Error(`User with login = ${login} not found`);
+    }
+    return user;
 }
 
 export const changePassword = async (login, newPassword) => {
@@ -26,5 +44,9 @@ export const changePassword = async (login, newPassword) => {
 }
 
 export const getUser = async (login) => {
-    //TODO
+    const user = await userRepository.getUser(login);
+    if (!user) {
+        throw new Error(`User with login = ${login} not found`);
+    }
+    return user;
 }
