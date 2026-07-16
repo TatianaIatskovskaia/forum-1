@@ -1,12 +1,12 @@
 import * as accountingService from '../services/accounting.service.js';
 
 
-export const register = async (req, res) => {
-    const user = await accountingService.register(req.body);
-    if (user) {
-        res.status(201).json(user);
-    } else {
-        res.status(409).send();
+export const register = async (req, res, next) => {
+    try {
+        const user = await accountingService.register(req.body);
+        return res.status(201).json(user);
+    } catch (e) {
+        return next(e);
     }
 };
 
