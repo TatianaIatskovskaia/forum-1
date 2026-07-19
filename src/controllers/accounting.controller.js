@@ -11,7 +11,8 @@ export const register = async (req, res, next) => {
 };
 
 export const logIn = async (req, res) => {
-    //todo
+    const user = await accountingService.getUser(req.principal.userName);
+    return res.json(user);
 };
 
 export const deleteUser = async (req, res, next) => {
@@ -51,7 +52,8 @@ export const  deleteRole = async (req, res, next) => {
 };
 
 export const changePassword = async (req, res, next) => {
-    //todo
+    await accountingService.changePassword(req.principal.userName, req.body.password);
+    return res.sendStatus(204);
 };
 
 export const getUser = async (req, res, next) => {
