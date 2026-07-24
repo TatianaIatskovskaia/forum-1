@@ -1,16 +1,23 @@
-import express from 'express';
+import express, {Router} from 'express';
 import config from './configuration/config.js';
 import mongoose from "mongoose";
 import postRoutes from './routes/post.routes.js';
 import accountRoutes from './routes/accounting.routes.js';
 import errorHandler from "./middlewares/error.middleware.js";
 import authentication from "./middlewares/authentication.middleware.js";
+import {createAdmin} from "./configuration/initAdmin.js";
+import {hasRole} from "./middlewares/authorization.middleware.js";
+import {ADMIN} from "./configuration/const.js";
 
 const app = express();
 
 app.use(express.json());
-
 app.use(authentication);
+
+const authorizationRouter = Router();
+authorizationRouter.patch('/account/user/:user/role/:role', hasRole(ADMIN));
+authorizationRouter.delete('/account/user/:user/role/:role', hasRole(ADMIN));
+app.use(authorizationRouter);
 
 app.use('/forum', postRoutes);
 app.use('/account', accountRoutes);
@@ -22,6 +29,7 @@ app.use((req, res) => res.status(404).type('text/plain; charset=utf-8').send('No
 const connectDB = async () => {
     try {
         await mongoose.connect(config.mongodb.uri, config.mongodb.db)
+        await createAdmin();
         console.log('Connected to MongoDB');
     } catch (e) {
         console.log('Failed connection to MongoDB: ', e);

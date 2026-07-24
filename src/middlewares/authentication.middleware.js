@@ -1,7 +1,7 @@
 import UserAccount from '../models/userAccount.Model.js';
 
 const authentication = async (req, res, next) => {
-    if (req.path !== '/account/register') {
+    if (req.path !== '/account/register' && !req.path.startsWith('/forum/posts')) {
         const token = req.headers.authorization;
         if (!token || !token.startsWith('Basic ')) {
             return res.status(401).json({message: 'Authorization required'});

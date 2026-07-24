@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import {ADMINISTRATOR, MODERATOR, USER} from "../configuration/const.js";
+import {ADMIN, MODERATOR, USER} from "../configuration/const.js";
 
 const schemas = {
     createPost: Joi.object({
@@ -31,7 +31,7 @@ const schemas = {
     }),
     roles: Joi.object({
         user: Joi.string().required(),
-        role: Joi.string().valid(USER, MODERATOR, ADMINISTRATOR).required().insensitive()
+        role: Joi.string().valid(USER, MODERATOR, ADMIN).required().insensitive()
     })
 }
 
