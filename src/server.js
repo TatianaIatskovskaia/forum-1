@@ -14,9 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(authentication);
 
-const authorizationRouter = Router();
-authorizationRouter.all('/account/user/:user/role/:role', hasRole(ADMIN));
-app.use(authorizationRouter);
+app.use('/account/user/:user/role/:role', hasRole(ADMIN));
 
 app.use('/forum', postRoutes);
 app.use('/account', accountRoutes);
