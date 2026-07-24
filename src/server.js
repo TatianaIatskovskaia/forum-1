@@ -1,4 +1,4 @@
-import express, {Router} from 'express';
+import express from 'express';
 import config from './configuration/config.js';
 import mongoose from "mongoose";
 import postRoutes from './routes/post.routes.js';
@@ -6,15 +6,14 @@ import accountRoutes from './routes/accounting.routes.js';
 import errorHandler from "./middlewares/error.middleware.js";
 import authentication from "./middlewares/authentication.middleware.js";
 import {createAdmin} from "./configuration/initAdmin.js";
-import {hasRole} from "./middlewares/authorization.middleware.js";
-import {ADMIN} from "./configuration/const.js";
+import authorizationRouter from "./routes/authorization.routes.js";
 
 const app = express();
 
 app.use(express.json());
-app.use(authentication);
 
-app.use('/account/user/:user/role/:role', hasRole(ADMIN));
+app.use(authentication);
+app.use(authorizationRouter);
 
 app.use('/forum', postRoutes);
 app.use('/account', accountRoutes);
