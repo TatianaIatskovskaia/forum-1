@@ -11,12 +11,10 @@ export const isOwnerOrHasRole = (name, role) => (req, res, next) => req.principa
 
 export const isAuthor = (postId) => async (req, res, next) => {
     const post = await getPostById(req.params[postId]);
-    const postAuthor = post.author;
-    return req.principal.userName === postAuthor ? next() : res.status(403).json({message: 'Access denied'});
+    return req.principal.userName === post.author ? next() : res.status(403).json({message: 'Access denied'});
 }
 
 export const isAuthorOrHasRole = (postId, role) => async (req, res, next) => {
     const post = await getPostById(req.params[postId]);
-    const postAuthor = post.author;
-    return req.principal.userName === postAuthor || req.principal.roles.includes(role.toUpperCase().trim()) ? next() : res.status(403).json({message: 'Access denied'});
+    return req.principal.userName === post.author || req.principal.roles.includes(role.toUpperCase().trim()) ? next() : res.status(403).json({message: 'Access denied'});
 }
