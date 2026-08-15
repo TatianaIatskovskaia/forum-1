@@ -1,7 +1,7 @@
 const config = {
     port: process.env.PORT || 3000,
     mongodb: {
-        uri: process.env.MONGODB_URI || 'mongodb://edd:1234@localhost:27017/java63?authSource=admin',
+        uri: process.env.MONGODB_URI || 'mongodb://tania:1234@localhost:27017/java63?authSource=admin',
         db: {
             dbName: process.env.DB_NAME || 'java63'
         }
